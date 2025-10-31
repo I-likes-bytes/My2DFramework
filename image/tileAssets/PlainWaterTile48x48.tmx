@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="14" height="14" tilewidth="48" tileheight="48" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="Downloads/Biomes_Tilesets/Biomes_Tilesets/IceTiles.tsx"/>
+ <tileset firstgid="50" source="Downloads/Biomes_Tilesets/Biomes_Tilesets/SeaTiles.tsx"/>
+ <tileset firstgid="86" source="Downloads/Biomes_Tilesets/Biomes_Tilesets/FieldGrass.tsx"/>
+ <tileset firstgid="128" source="Downloads/Biomes_Tilesets/Biomes_Tilesets/Sand.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="14" height="14">
+  <data encoding="csv">
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+56,56,56,56,56,56,56,56,56,56,56,56,56,56
+</data>
+ </layer>
+</map>
