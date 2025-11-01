@@ -33,3 +33,21 @@ nextPosX, nextPosY are used to detect collision independently for both axis.
 - Trying to address the bug that exist with the Player being able to slip out of
 the corners of the tileMap.
 
+Problem:
+After doing some research I found that the reason for the Player being able to slip out of the corners of the tileMap when moving diaganolly is because when the player is in the corner there is a double collision happening. This double collision causes ambiguity, the game notices it touches two walls and then 
+is stuck trying to determine which direction specifically is causing the collision.
+so when the code is trying to apply the change in position (by canceling movement or 
+setting dx and dy to  0) it does it in both axes at once. Both directions being corrected
+at the same time enables the Player's position to end up slightly overlapping one of the 
+tiles. When the Player overlaps, on the next frame the player's bounding box starts inside the
+wall (Tile) which would prevent the collision check from resolving this correctly as the player
+is already intersecting allowing the player to slip through the corner gap. 
+
+Solution:
+I saw on a Reddit thread that splitting movement into two independent checks gets rid of the 
+confusion that occurs when a double collision happens. First the player moves in one direction,
+if a wall is hit STOP movement in this direction immediately. Then the player moves in the other
+direction, if a wall is hit STOP in this direction immediately. With each axis handled independently
+the collision correction is always clear, the computer no longer is stuck trying to determine which
+of the axes it needs to correct.
+ 

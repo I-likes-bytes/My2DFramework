@@ -122,6 +122,79 @@ public class Player extends GameObject {
          * Rectangle and variable for collision detection. 
          */
         
+        if(dx != 0) {
+        	
+        	//Rectangle used to detect collisions on the X-axis
+            Rectangle nextPosX = new Rectangle (	
+            		(int) (x + dx),
+            		(int) y,
+            		width,
+            		height
+            );
+            
+            boolean collidesX = false;
+            
+            
+            for(Tile tile : world.getTileMap().getTiles()) {
+            	
+            	if(tile.isSolid()) {
+            		Rectangle tileBounds = tile.getBounds();
+            	
+            		if( nextPosX.intersects(tileBounds) ) {
+            			collidesX = true;
+            			break;
+            			
+            		}
+            		
+            	}
+            	
+            }
+            
+            if(!collidesX) {
+            	x += dx;
+            }
+        }
+        
+        
+        
+        if(dy != 0) {
+        	
+        	//Rectangle used to detect collisions on the X-axis
+            Rectangle nextPosY = new Rectangle (	
+            		(int) x,
+            		(int) (y + dy),
+            		width,
+            		height
+            );
+            
+            boolean collidesY = false;
+            
+            for(Tile tile : world.getTileMap().getTiles()) {
+            	
+            	if(tile.isSolid()) {
+            		Rectangle tileBounds = tile.getBounds();
+            		
+            		if( nextPosY.intersects(tileBounds) ) {
+            			collidesY = true;
+            			break;
+            			
+            		}
+            		
+            	}
+            }
+            
+            if(!collidesY) {
+            	y += dy;
+            	
+            }
+            
+        }
+        
+        
+        /*
+         * 
+         * 
+         
         //Rectangle used to detect collisions on the X-axis
         Rectangle nextPosX = new Rectangle (	
         		(int) (x + dx),
@@ -138,6 +211,7 @@ public class Player extends GameObject {
         		height
         );
         
+       
         //FOR OBJECTS THAT DON"T ALLOW COLLISION
         for(GameObject obj : world.getSolidObjects()) {
         	
@@ -154,6 +228,7 @@ public class Player extends GameObject {
         	}
         	
         }
+        
         
         
         //FOR TILES THAT DON'T ALLOW COLLISION
@@ -193,10 +268,17 @@ public class Player extends GameObject {
             y += dy;
         	
         }
+        *
+        *
+        *
+        */
+        
 
       //============================== END OF COLLISION DETECTION LOGIC =====================================
         
         
+        
+      //=================================== ANIMATION HANDLING ==============================================
         
         /*
          * For animation timing, checks whether enough time has passed @variable FRAME_DELAY
@@ -209,6 +291,9 @@ public class Player extends GameObject {
             frameToggle = !frameToggle;
             lastFrameTime = now;
         }
+        
+      //=================================== ANIMATION HANDLING ==============================================
+        
         
         
 	}
