@@ -1,0 +1,19 @@
+# Ignore build output
+bin/
+out/
+build/
+
+# Ignore IDE/project files
+*.class
+*.log
+*.tmp
+*.swp
+
+# Ignore Eclipse / IntelliJ / VS Code configs
+.vscode/
+.idea/
+*.iml
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
