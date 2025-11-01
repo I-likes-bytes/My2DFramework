@@ -10,11 +10,15 @@ import engine.Updatable;
 public class WorldManager implements Updatable {
 
 	private ArrayList<GameObject> objects; //Holds every object currently in the world
+	private ArrayList<GameObject> solidObjects; //Holds solid object for object based collision detection
+	
 	private TileMap tileMap;
 	
 	
 	public WorldManager() {
 		objects = new ArrayList<>();
+		solidObjects = new ArrayList<>();
+		
 		tileMap = new TileMap();
 		
 	}
@@ -60,6 +64,12 @@ public class WorldManager implements Updatable {
 	//Getter to return all objects
 	public ArrayList<GameObject> getObjects(){
 		return objects;
+		
+	}
+	
+	//Getter to return all solid objects
+	public ArrayList<GameObject> getSolidObjects(){
+		return solidObjects;
 		
 	}
 	

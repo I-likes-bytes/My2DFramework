@@ -36,7 +36,7 @@ public class Player extends GameObject {
 	}
 
 	/**
-	 * Method used to load player assets just once
+	 * Method used to load player assets once
 	 */
 	private void loadSprites() {
 		up1 = new ImageIcon("image/playerAssets/sprite_5.png").getImage();
@@ -110,36 +110,91 @@ public class Player extends GameObject {
         }
         
         
-        //Collision detection before applying movement
-        boolean canMove = true;
+        //============================== COLLISION DETECTION LOGIC =========================================
         
-        Rectangle nextPos = new Rectangle (	
+        boolean canMoveX = true;
+        boolean canMoveY = true;
+        
+        /**
+         * By using two separate Rectangle objects and two variables for enabling movement collision detection
+         * can be done on each access independent of one another. In game collisions can occur on one axis and
+         * not on the other. Doing this prevents the "sticky-edge" effect I was getting when only using a single
+         * Rectangle and variable for collision detection. 
+         */
+        
+        //Rectangle used to detect collisions on the X-axis
+        Rectangle nextPosX = new Rectangle (	
         		(int) (x + dx),
+        		(int) y,
+        		width,
+        		height
+        );
+        
+        //Rectangle used to detect collision on the Y-axis
+        Rectangle nextPosY = new Rectangle (	
+        		(int) x,
         		(int) (y + dy),
         		width,
         		height
         );
         
+        //FOR OBJECTS THAT DON"T ALLOW COLLISION
+        for(GameObject obj : world.getSolidObjects()) {
+        	
+        	if( nextPosX.intersects( obj.getBounds() ) ) {
+        		canMoveX = false;
+        		break;
+        		
+        	}
+        	
+        	if( nextPosY.intersects( obj.getBounds() ) ) {
+        		canMoveY = false;
+        		break;
+        		
+        	}
+        	
+        }
+        
+        
+        //FOR TILES THAT DON'T ALLOW COLLISION
         for(Tile tile : world.getTileMap().getTiles()) {
         	if(tile.isSolid()) {
-        		Rectangle tileBounds = new Rectangle(tile.getX(), tile.getY(), GameSettings.TILE_SIZE, GameSettings.TILE_SIZE);
+        		Rectangle tileBounds = new Rectangle(
+        				tile.getX(),
+        				tile.getY(),
+        				GameSettings.TILE_SIZE,
+        				GameSettings.TILE_SIZE
+        		);
         		
-        		if( nextPos.intersects(tileBounds) ) {
-        			canMove = false;
+        		
+        		if( nextPosX.intersects(tileBounds) ) {
+        			canMoveX = false;
         			break;
+        			
         		}
+        		
+        		if( nextPosY.intersects(tileBounds) ) {
+        			canMoveY = false;
+        			break;
+        			
+        		}
+        		
         	}
         	
         }
 
-        //Apply movement only if no collision detected
-        if(canMove) {
+        //Apply movement separately ONLY IF no collision is detected
+        if(canMoveX) {
             x += dx;
+        	
+        }
+        
+        if(canMoveY) {
             y += dy;
         	
         }
 
-
+      //============================== END OF COLLISION DETECTION LOGIC =====================================
         
         
         
