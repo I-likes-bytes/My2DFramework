@@ -1,4 +1,4 @@
-package engine;
+package engine.core;
 
 import javax.swing.JFrame;
 import game.GamePanel;
@@ -18,11 +18,6 @@ public class GameWindow extends JFrame {
 		this.setVisible(true);
 		
 		panel.startGame();
-		
-	}
-	
-	public static void main(String[] args) {
-		new GameWindow();
 		
 	}
 	

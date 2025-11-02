@@ -1,10 +1,10 @@
-package game;
+package game.world;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import engine.GameSettings;
-import engine.Updatable;
+import engine.core.GameSettings;
+import engine.core.Updatable;
 
 public class TileMap implements Updatable {
 

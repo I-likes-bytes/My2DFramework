@@ -1,4 +1,4 @@
-package engine;
+package engine.core;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 public abstract class GameObject implements Updatable {
 
 	protected int x, y, width, height;
+	protected boolean solid = false;
 	
 	
 	public GameObject(int x, int y, int width, int height) {
@@ -24,6 +25,18 @@ public abstract class GameObject implements Updatable {
 		return new Rectangle(x, y, width, height);
 
 	}
+	
+	public boolean isSolid() {
+		return solid;
+		
+	}
+	
+	public void setSolid(boolean solid) {
+		this.solid = solid;
+		
+	}
+	
+
 	
 	//Getters
 	public int getX() {

@@ -5,12 +5,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
-import engine.GameLoop;
-import engine.GameSettings;
-import engine.InputManager;
-import engine.Updatable;
+import engine.core.GameLoop;
+import engine.core.GameSettings;
+import engine.core.Updatable;
+import engine.input.InputManager;
 
-import game.WorldManager;
+import game.entities.Player;
+import game.objects.Coin;
+import game.objects.SignObject;
+import game.world.WorldManager;
 
 public class GamePanel extends JPanel implements Updatable {
 	
@@ -31,6 +34,10 @@ public class GamePanel extends JPanel implements Updatable {
 		
 		player = new Player(100, 100, input, world);
 		world.addObject(player); //Adding player to world
+		
+		world.addObject(new SignObject(500, 100, 32, 32));
+		
+		world.addObject(new Coin(300, 100, 32, 32));
 		
 		
 		

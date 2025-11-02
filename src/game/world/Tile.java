@@ -1,10 +1,10 @@
-package game;
+package game.world;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
-import engine.GameObject;
+import engine.core.GameObject;
 
 public class Tile extends GameObject {
 	

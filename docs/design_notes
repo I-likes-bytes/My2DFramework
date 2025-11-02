@@ -1,0 +1,26 @@
+### Design Notes
+
+## 2025/11/1
+
+I'm going to create classes for different types of Objects. I was trying to just
+create a Class for a Sign Object that I wanted to put in the game that would 
+prevent the player from walking over it and realized I would be better suited
+already creating classes for different classifications of objects.
+Eventually I want there to be a combat system and some sort of level system that
+will enable either abilities or different weapons off. Off the top of my head 
+some classes that I can create now are
+
+-StaticSolidObjects
+These wont move at all and will simply just obstruct the player's path, I guess
+this could also eventually be used if I wanted to add buildings of some sort in
+that case this class could also be used again
+
+-InteractiveObjects
+These don't move but can be interacted. I was thinking in this particular case
+for my own game I could use the class for XP, Weapons, Potions, Chests, etc. 
+This class will be reused a lot I'm already assuming. 
+
+More classifications for objects will be thought of as I get further into the 
+game, the only reason this is a thing now is because I bought an asset pack and
+wanted to start utilizing some of these for different objects I had in mind.
+

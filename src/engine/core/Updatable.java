@@ -1,4 +1,4 @@
-package engine;
+package engine.core;
 
 public interface Updatable {
 

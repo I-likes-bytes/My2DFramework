@@ -1,4 +1,4 @@
-package game;
+package game.entities;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -6,9 +6,13 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-import engine.GameObject;
-import engine.GameSettings;
-import engine.InputManager;
+import engine.core.GameObject;
+import engine.core.GameSettings;
+import engine.input.InputManager;
+import game.objects.InteractiveObject;
+import game.objects.SignObject;
+import game.world.Tile;
+import game.world.WorldManager;
 
 import java.awt.event.KeyEvent;
 
@@ -29,7 +33,7 @@ public class Player extends GameObject {
 		super(x, y, 48, 48);
 		
 		this.input = input;
-		this.world = world;
+		this.world = world;	
 		
 		loadSprites();
 		
@@ -150,6 +154,17 @@ public class Player extends GameObject {
             	
             }
             
+          //Collision with solid object test
+            for(GameObject obj : world.getSolidObjects()) {
+            	
+            	if( obj.isSolid() && nextPosX.intersects(obj.getBounds()) ) {
+            		 collidesX = true;
+            		 break;
+            		 
+            	}
+        
+            }
+            
             if(!collidesX) {
             	x += dx;
             }
@@ -183,6 +198,17 @@ public class Player extends GameObject {
             	}
             }
             
+            //Collision with solid object test
+            for(GameObject obj : world.getSolidObjects()) {
+            	
+            	if( obj.isSolid() && nextPosY.intersects(obj.getBounds()) ) {
+            		 collidesY = true;
+            		 break;
+            		 
+            	}
+        
+            }
+            
             if(!collidesY) {
             	y += dy;
             	
@@ -191,90 +217,31 @@ public class Player extends GameObject {
         }
         
         
-        /*
-         * 
-         * 
-         
-        //Rectangle used to detect collisions on the X-axis
-        Rectangle nextPosX = new Rectangle (	
-        		(int) (x + dx),
-        		(int) y,
-        		width,
-        		height
-        );
-        
-        //Rectangle used to detect collision on the Y-axis
-        Rectangle nextPosY = new Rectangle (	
-        		(int) x,
-        		(int) (y + dy),
-        		width,
-        		height
-        );
-        
-       
-        //FOR OBJECTS THAT DON"T ALLOW COLLISION
-        for(GameObject obj : world.getSolidObjects()) {
-        	
-        	if( nextPosX.intersects( obj.getBounds() ) ) {
-        		canMoveX = false;
-        		break;
-        		
-        	}
-        	
-        	if( nextPosY.intersects( obj.getBounds() ) ) {
-        		canMoveY = false;
-        		break;
-        		
-        	}
-        	
-        }
-        
-        
-        
-        //FOR TILES THAT DON'T ALLOW COLLISION
-        for(Tile tile : world.getTileMap().getTiles()) {
-        	if(tile.isSolid()) {
-        		Rectangle tileBounds = new Rectangle(
-        				tile.getX(),
-        				tile.getY(),
-        				GameSettings.TILE_SIZE,
-        				GameSettings.TILE_SIZE
-        		);
-        		
-        		
-        		if( nextPosX.intersects(tileBounds) ) {
-        			canMoveX = false;
-        			break;
-        			
-        		}
-        		
-        		if( nextPosY.intersects(tileBounds) ) {
-        			canMoveY = false;
-        			break;
-        			
-        		}
-        		
-        	}
-        	
-        }
-
-        //Apply movement separately ONLY IF no collision is detected
-        if(canMoveX) {
-            x += dx;
-        	
-        }
-        
-        if(canMoveY) {
-            y += dy;
-        	
-        }
-        *
-        *
-        *
-        */
-        
 
       //============================== END OF COLLISION DETECTION LOGIC =====================================
+        
+        
+        
+      //==============================        INTERACTION CHECK        =====================================
+        
+        for(GameObject obj : world.getObjects()) {
+        	
+        	//Check if the object is an interactive one
+        	if(obj instanceof InteractiveObject) {
+        		game.objects.InteractiveObject interactive = (game.objects.InteractiveObject) obj;
+        		
+        		
+        		//Only trigger if not already collected
+        		if(!interactive.isCollected() && this.getBounds().intersects(interactive.getBounds()) ) {
+        			interactive.onInteract(); //Tell the object it was collected
+        			
+        		}
+        	}
+        	
+        }
+        
+      //==============================      END OF INTERACTION CHECK      =====================================
+          
         
         
         
